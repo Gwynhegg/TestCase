@@ -1,9 +1,10 @@
 import java.util.Collection;
 import java.util.HashMap;
 
+//Класс для взаимодействия с текстом
 public class TextManagement {
 
-    private HashMap<String, Text> textMap;
+    private HashMap<String, Text> textMap;          // Хэшмап для хранения id и содержимого текста
 
     public TextManagement(){
         textMap = new HashMap<String, Text>();
@@ -12,7 +13,7 @@ public class TextManagement {
         textMap.put(text.getId(), text);
     }
     public void addCategories(String id, Text added_category){
-    textMap.get(id).addCategories(added_category);
+        textMap.get(id).addCategories(added_category);
     }
 
     public Collection<Text> getTexts(){
@@ -26,5 +27,4 @@ public class TextManagement {
     public Text getText (String id){
         return textMap.get(id);
     }
-
 }

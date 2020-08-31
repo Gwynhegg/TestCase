@@ -1,5 +1,6 @@
 import java.util.*;
 
+//Структура дерева для задания иерархии разделов
 public class EasyFileTree {
 
     private EasyFileTree parent = null;
@@ -41,20 +42,20 @@ public class EasyFileTree {
         parent = tree;
     }
 
-    public Text addChild(EasyFileTree tree, int level){
+    public Text addChild(EasyFileTree tree, int level){         // Добавление нового элемента в дерево
         tree.setLevel(level);
-        if (this.childrens.isEmpty()) {
+        if (this.childrens.isEmpty()) {                         // Если у данного узла нет детей, то добавляем элемент в качестве дочернего
             tree.setParent(this);   tree.setId(this.id + ".1"); this.childrens.add(tree);
             tree.getContent().setId(tree.getId());
             return tree.getContent();
         }
-        if (this.childrens.getLast().getLevel()==level){
+        if (this.childrens.getLast().getLevel()==level){        // Если вводимый элемент одного уровня с детьми текущего элемента, то добавляем на тот же уровень
             tree.setParent(this);   this.childrens.add(tree); tree.setId(this.id+ "."+this.childrens.size());
             tree.getContent().setId(tree.getId());
             return tree.getContent();
-        } else if (this.childrens.getLast().getLevel()<level){
+        } else if (this.childrens.getLast().getLevel()<level){      // Если элемент более высшего уровня, чем текущие, то уходим выше по иерархии
             return this.childrens.getLast().addChild(tree, level);
-        } else return this.childrens.getLast().getParent().addChild(tree, level);
+        } else return this.childrens.getLast().getParent().addChild(tree, level); // В противном случае, уходим ниже, к корню дерева
 
     }
 }
